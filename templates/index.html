@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plinko Game 🎯</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+        }
+        canvas {
+            background-color: #1f1f1f;
+            display: block;
+            margin: 20px auto;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #00bfa6;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Welcome to Plinko</h1>
+    <canvas id="plinkoCanvas" width="300" height="400"></canvas>
+    <button onclick="dropBall()">Drop Ball</button>
+
+    <script>
+        const canvas = document.getElementById("plinkoCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let y = 0;
+        const radius = 6;
+
+        function dropBall() {
+            y = 0;
+            animate();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = "#ff4444";
+            ctx.fill();
+            ctx.closePath();
+
+            if (y < canvas.height - radius) {
+                y += 4;
+                requestAnimationFrame(animate);
+            } else {
+                alert("🎉 Ball dropped!");
+            }
+        }
+    </script>
+</body>
+</html>
