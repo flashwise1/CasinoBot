@@ -1,65 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Plinko Game 🎯</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #fff;
-            text-align: center;
-            padding: 30px;
-        }
-        canvas {
-            background-color: #1f1f1f;
-            display: block;
-            margin: 20px auto;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background: #00bfa6;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casino Plinko</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <h1>🎮 Welcome to Plinko</h1>
-    <canvas id="plinkoCanvas" width="300" height="400"></canvas>
-    <button onclick="dropBall()">Drop Ball</button>
+  <div class="container">
+    <div class="header">
+      <span class="balance-label">BALANCE</span>
+      <span class="balance">$168.08</span>
+    </div>
 
-    <script>
-        const canvas = document.getElementById("plinkoCanvas");
-        const ctx = canvas.getContext("2d");
+    <div class="game-body">
+      <div class="controls">
+        <div class="tabs">
+          <button class="tab active">MANUAL</button>
+          <button class="tab">AUTO</button>
+        </div>
 
-        let y = 0;
-        const radius = 6;
+        <label>Bet Amount</label>
+        <div class="bet-input">
+          <span>$</span>
+          <input type="number" value="0.10" />
+          <button>1/2</button>
+          <button>2X</button>
+        </div>
 
-        function dropBall() {
-            y = 0;
-            animate();
-        }
+        <label>Risk</label>
+        <div class="risk-options">
+          <button class="risk-btn">LOW</button>
+          <button class="risk-btn">MEDIUM</button>
+          <button class="risk-btn active">HIGH</button>
+        </div>
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            ctx.arc(canvas.width / 2, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = "#ff4444";
-            ctx.fill();
-            ctx.closePath();
+        <button class="bet-btn">BET</button>
+      </div>
 
-            if (y < canvas.height - radius) {
-                y += 4;
-                requestAnimationFrame(animate);
-            } else {
-                alert("🎉 Ball dropped!");
-            }
-        }
-    </script>
+      <div class="plinko-board" id="plinko-board">
+        <!-- pegs & bins will go here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
